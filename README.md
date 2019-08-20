@@ -14,14 +14,14 @@ serverless.yml
 custom:
   cloudmap:
     service:
-      cfname: 'MyService' # Cloudformation friendly name
-      name: 'my-service' # Service name
+      cfname: 'UserService' # Cloudformation friendly name
+      name: 'user-service' # Service name
       namespace: 'namespace-id' # Reference to a namespace ID
       description: 'Some description'
     instances:
-      - cfname: 'ThingInstance' # Cloudformation friendly name
-        name: 'user.created' # Individual, friendly function name
-        id: 'testing.123' # Unique ID (optional, can be used instead of name)
+      - cfname: 'UserCreateInstance' # Cloudformation friendly name
+        name: 'user.create' # Individual, friendly function name
+        id: 'create.create-123' # Unique ID (optional, can be used instead of name)
         arn: 'arn::etc' # Arn or reference to your individual serverless function
         config:
           retries: 3 # Additional configuration or metadata
