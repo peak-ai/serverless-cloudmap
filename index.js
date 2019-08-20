@@ -17,33 +17,42 @@ class Cloudmap {
   }
 
   generateCloudformation() {
-    const { cloudmap } = this.serverless.service.custom;
+    const {
+      cloudmap
+    } = this.serverless.service.custom;
     const rsrc = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
-    const { service, instances } = cloudmap;
-    rsrc[service.cfname] = {
-      'Type': 'AWS::ServiceDiscovery::Service',
-      'Properties': {
-        'Description': service.description,
-        'Name': service.name,
-        'NamespaceId': service.namespace,
-      },
-    };
-    for (let i in instances) {
-      const func = instances[i];
-      rsrc[func.cfname] = {
-        'Type': "AWS::ServiceDiscovery::Instance",
+    const {
+      services
+    } = cloudmap;
+    services.forEach((service) => {
+      console.log(service);
+      rsrc[service.cfname] = {
+        'Type': 'AWS::ServiceDiscovery::Service',
         'Properties': {
-          'InstanceAttributes': {
-            'arn': func.arn,
-            'handler': func.name,
-            'type': 'function',
-            ...func.config,
-          },
-          'InstanceId': func.arn,
-          'ServiceId': func.id,
+          'Description': service.description,
+          'Name': service.name,
+          'NamespaceId': service.namespace,
         },
       };
-    }
+      service.instances.forEach((instance) => {
+        rsrc[instance.cfname] = {
+          'Type': "AWS::ServiceDiscovery::Instance",
+          'Properties': {
+            'InstanceAttributes': {
+              'arn': instance.arn,
+              'handler': instance.name,
+              'type': 'function',
+              ...instance.config,
+            },
+            'InstanceId': instance.arn,
+            'ServiceId': {
+              'Ref': service.cfname,
+            }
+          },
+        };
+      });
+    });
+
     this.serverless.service.provider.compiledCloudFormationTemplate.Resources = rsrc;
   };
 }
