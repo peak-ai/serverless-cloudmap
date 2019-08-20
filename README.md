@@ -27,7 +27,7 @@ custom:
           retries: 3 # Additional configuration or metadata
 ```
 
-## Using application libraries
+## Using application libraries
 
 You can utilise this plugin with some additional libraries created to provide a rich application framework feel to AWS + Serverless.
 
