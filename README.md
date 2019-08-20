@@ -6,7 +6,7 @@ Cloudmap is an AWS tool for service discovery, and servide metadata. This is use
 
 Imagine being able to resolve the location of any of your lambda functions with a user friendly name, such as `create.user`.
 
-## Registering a service and your individual functions
+## Registering a service and your individual functions
 
 serverless.yml
 
