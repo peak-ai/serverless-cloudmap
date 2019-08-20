@@ -20,8 +20,8 @@ custom:
         description: 'Some description'
         instances:
           - cfname: 'UserCreateInstance' # Cloudformation friendly name
-            name: 'user.create' # Individual, friendly function name
-            id: 'create.create-123' # Unique ID (optional, can be used instead of name)
+            name: 'create' # Individual, friendly function name
+            id: 'create-123' # Unique ID (optional, can be used instead of name)
             arn: 'arn::etc' # Arn or reference to your individual serverless function
             config:
               retries: 3 # Additional configuration or metadata
@@ -37,8 +37,8 @@ You can utilise this plugin with some additional libraries created to provide a 
 Once you've registered your Lambda functions/services, you can then call them with the above libraries:
 
 ```javascript
-const res = await Discovery.request('user.create', user); // Calls a Lambda
-await Discovery.queue('new.users', user); // Puts a message on an SQS Queue
+const res = await Discovery.request('user-service->create', user); // Calls a Lambda default.user-service.create (namespace.service.instance).
+await Discovery.queue('new-users', user); // Puts a message on an SQS Queue
 ```
 
 ## Todo
