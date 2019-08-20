@@ -25,7 +25,6 @@ class Cloudmap {
       services
     } = cloudmap;
     services.forEach((service) => {
-      console.log(service);
       rsrc[service.cfname] = {
         'Type': 'AWS::ServiceDiscovery::Service',
         'Properties': {
