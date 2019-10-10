@@ -43,7 +43,7 @@ class Cloudmap {
               'type': 'function',
               ...instance.config,
             },
-            'InstanceId': instance.arn,
+            'InstanceId': instance.name,
             'ServiceId': {
               'Ref': service.cfname,
             }
